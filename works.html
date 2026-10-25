@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>项目 · 我的主页</title>
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- 这段小脚本会在页面「显示出来之前」就先跑一遍：
+       先看看你上次选的是不是深色，如果是，就立刻给 <html> 加上 theme-dark 这个 class。
+       这样打开页面时不会先闪一下白色再变黑（不做这一步也能切换，只是会闪）。 -->
+  <script>
+    (function () {
+      var saved = localStorage.getItem('theme');
+      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (saved === 'dark' || (!saved && prefersDark)) {
+        document.documentElement.classList.add('theme-dark');
+      }
+    })();
+  </script>
+</head>
+<body>
+
+  <!-- 屏幕两侧的装饰图片：只在宽屏显示（≥1360px），窄屏会自动隐藏。
+       aria-hidden="true" 是告诉读屏软件「这只是装饰，不用念出来」。 -->
+  <div class="side-deco" aria-hidden="true">
+    <img src="images/side-left.jpg" alt="">
+    <img src="images/side-right.jpg" alt="">
+  </div>
+
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="site-name">我的主页</a>
+      <!-- 页头右边：把「导航」和「主题按钮」打包成一个整体 -->
+      <div class="header-right">
+        <nav class="nav">
+          <a href="index.html">首页</a>
+          <a href="about.html">关于我</a>
+          <a href="posts.html">文章</a>
+          <a href="works.html" class="active">项目</a>
+          <a href="contact.html">联系我</a>
+          <!-- 外站链接：target="_blank" 表示在新标签页打开，
+               rel="noopener" 是安全写法（不让新页面反过来控制本站），下同 -->
+          <a href="https://blog.csdn.net/good_sleeping" target="_blank" rel="noopener">CSDN</a>
+        </nav>
+        <!-- 主题按钮：上面的文字会由 js/main.js 自动改成「深色」或「浅色」 -->
+        <button class="theme-toggle" type="button">深色</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <h1 class="page-title">项目作品</h1>
+    <p class="page-desc">练习过程中的三个小项目，图片是示例图，之后换成你自己的截图。</p>
+
+    <!-- 这个网格会自动决定一行放几张卡片：屏幕宽就 3 张，窄就 1 张 -->
+    <section class="section">
+      <div class="project-grid">
+
+        <article class="project-card">
+          <!-- 图片外面多包了一层 .project-thumb 盒子，
+               它负责把「点击出现的水波纹」稳稳地裁在图片范围内。 -->
+          <div class="project-thumb">
+            <!-- 换成自己的项目截图：把 src 改成 images/xxx.png 就行 -->
+            <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=clean%20minimal%20personal%20blog%20website%20interface%20mockup%20on%20a%20laptop%20screen%2C%20wooden%20desk%2C%20soft%20daylight%2C%20photorealistic&image_size=landscape_4_3" alt="个人博客网站项目截图">
+          </div>
+          <div class="project-body">
+            <h3>个人博客网站</h3>
+            <p>就是我正在做的这个网站，用纯 HTML 和 CSS 手写，没有用任何框架。</p>
+            <a class="btn" href="index.html">看看效果</a>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-thumb">
+            <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=simple%20todo%20list%20web%20app%20interface%20on%20a%20desktop%20monitor%2C%20bright%20modern%20workspace%2C%20clean%20flat%20design%2C%20photorealistic&image_size=landscape_4_3" alt="待办事项清单项目截图">
+          </div>
+          <div class="project-body">
+            <h3>待办事项清单</h3>
+            <p>练习列表布局和表单的小项目，标题、输入框、按钮各来一份。</p>
+            <a class="btn" href="posts.html">看相关笔记</a>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-thumb">
+            <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=weather%20forecast%20web%20page%20mockup%20on%20a%20tablet%20held%20in%20hands%2C%20minimal%20white%20interface%2C%20soft%20daylight%2C%20photorealistic&image_size=landscape_4_3" alt="天气卡片页面项目截图">
+          </div>
+          <div class="project-body">
+            <h3>天气卡片页面</h3>
+            <p>练手卡片和网格布局的页面，主要目的是熟悉 Grid 怎么排版。</p>
+            <a class="btn" href="posts.html">看相关笔记</a>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      © 2026 我的主页 · 用 HTML 和 CSS 手写而成<br>
+      我在 CSDN 也写博客：<a href="https://blog.csdn.net/good_sleeping" target="_blank" rel="noopener">good_sleeping 的主页</a>
+    </div>
+  </footer>
+
+  <!-- 交互脚本放在 </body> 前面：浏览器从上往下读，
+       读到这里时页面上所有标签都已经存在了，脚本才找得到它们。 -->
+  <script src="js/main.js"></script>
+
+</body>
+</html>

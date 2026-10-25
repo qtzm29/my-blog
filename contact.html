@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>联系我 · 我的主页</title>
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- 这段小脚本会在页面「显示出来之前」就先跑一遍：
+       先看看你上次选的是不是深色，如果是，就立刻给 <html> 加上 theme-dark 这个 class。
+       这样打开页面时不会先闪一下白色再变黑（不做这一步也能切换，只是会闪）。 -->
+  <script>
+    (function () {
+      var saved = localStorage.getItem('theme');
+      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (saved === 'dark' || (!saved && prefersDark)) {
+        document.documentElement.classList.add('theme-dark');
+      }
+    })();
+  </script>
+</head>
+<body>
+
+  <!-- 屏幕两侧的装饰图片：只在宽屏显示（≥1360px），窄屏会自动隐藏。
+       aria-hidden="true" 是告诉读屏软件「这只是装饰，不用念出来」。 -->
+  <div class="side-deco" aria-hidden="true">
+    <img src="images/side-left.jpg" alt="">
+    <img src="images/side-right.jpg" alt="">
+  </div>
+
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="site-name">我的主页</a>
+      <!-- 页头右边：把「导航」和「主题按钮」打包成一个整体 -->
+      <div class="header-right">
+        <nav class="nav">
+          <a href="index.html">首页</a>
+          <a href="about.html">关于我</a>
+          <a href="posts.html">文章</a>
+          <a href="works.html">项目</a>
+          <a href="contact.html" class="active">联系我</a>
+          <!-- 外站链接：target="_blank" 表示在新标签页打开，
+               rel="noopener" 是安全写法（不让新页面反过来控制本站），下同 -->
+          <a href="https://blog.csdn.net/good_sleeping" target="_blank" rel="noopener">CSDN</a>
+        </nav>
+        <!-- 主题按钮：上面的文字会由 js/main.js 自动改成「深色」或「浅色」 -->
+        <button class="theme-toggle" type="button">深色</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <h1 class="page-title">联系我</h1>
+    <p class="page-desc">下面都是占位信息，换成你自己的就行。欢迎一起交流前端学习。</p>
+
+    <!-- 每一行是一个联系方式：左边是标签，右边是内容 -->
+    <section class="section">
+      <ul class="contact-list">
+
+        <li>
+          <span class="contact-label">邮箱</span>
+          <!-- mailto: 链接点了会自动打开你的邮箱软件 -->
+          <a class="contact-value" href="mailto:your@email.com">your@email.com</a>
+        </li>
+
+        <li>
+          <span class="contact-label">GitHub</span>
+          <a class="contact-value" href="https://github.com/" target="_blank">github.com/yourname</a>
+        </li>
+
+        <li>
+          <span class="contact-label">CSDN 博客</span>
+          <!-- 这是外站链接，加 target="_blank" 让它在新标签页打开 -->
+          <a class="contact-value" href="https://blog.csdn.net/good_sleeping" target="_blank" rel="noopener">blog.csdn.net/good_sleeping</a>
+        </li>
+
+        <li>
+          <span class="contact-label">微信</span>
+          <span class="contact-value">your_wechat_id</span>
+        </li>
+
+        <li>
+          <span class="contact-label">所在城市</span>
+          <span class="contact-value">你的城市</span>
+        </li>
+
+      </ul>
+    </section>
+
+    <section class="section">
+      <a class="btn" href="index.html">返回首页</a>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      © 2026 我的主页 · 用 HTML 和 CSS 手写而成<br>
+      我在 CSDN 也写博客：<a href="https://blog.csdn.net/good_sleeping" target="_blank" rel="noopener">good_sleeping 的主页</a>
+    </div>
+  </footer>
+
+  <!-- 交互脚本放在 </body> 前面：浏览器从上往下读，
+       读到这里时页面上所有标签都已经存在了，脚本才找得到它们。 -->
+  <script src="js/main.js"></script>
+
+</body>
+</html>

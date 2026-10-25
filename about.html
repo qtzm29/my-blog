@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>关于我 · 我的主页</title>
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- 这段小脚本会在页面「显示出来之前」就先跑一遍：
+       先看看你上次选的是不是深色，如果是，就立刻给 <html> 加上 theme-dark 这个 class。
+       这样打开页面时不会先闪一下白色再变黑（不做这一步也能切换，只是会闪）。 -->
+  <script>
+    (function () {
+      var saved = localStorage.getItem('theme');
+      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (saved === 'dark' || (!saved && prefersDark)) {
+        document.documentElement.classList.add('theme-dark');
+      }
+    })();
+  </script>
+</head>
+<body>
+
+  <!-- 屏幕两侧的装饰图片：只在宽屏显示（≥1360px），窄屏会自动隐藏。
+       aria-hidden="true" 是告诉读屏软件「这只是装饰，不用念出来」。 -->
+  <div class="side-deco" aria-hidden="true">
+    <img src="images/side-left.jpg" alt="">
+    <img src="images/side-right.jpg" alt="">
+  </div>
+
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="site-name">我的主页</a>
+      <!-- 页头右边：把「导航」和「主题按钮」打包成一个整体 -->
+      <div class="header-right">
+        <nav class="nav">
+          <a href="index.html">首页</a>
+          <a href="about.html" class="active">关于我</a>   <!-- active 表示当前就在这一页 -->
+          <a href="posts.html">文章</a>
+          <a href="works.html">项目</a>
+          <a href="contact.html">联系我</a>
+          <!-- 外站链接：target="_blank" 表示在新标签页打开，
+               rel="noopener" 是安全写法（不让新页面反过来控制本站），下同 -->
+          <a href="https://blog.csdn.net/good_sleeping" target="_blank" rel="noopener">CSDN</a>
+        </nav>
+        <!-- 主题按钮：上面的文字会由 js/main.js 自动改成「深色」或「浅色」 -->
+        <button class="theme-toggle" type="button">深色</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <h1 class="page-title">关于我</h1>
+    <p class="page-desc">一段自我介绍的占位文字，之后换成你自己的就行。</p>
+
+    <!-- 自我介绍：.about-text 限制了段落宽度，一行太长会难读 -->
+    <section class="section about-text">
+      <p>
+        你好，我是杨昭林。目前是一名前端初学者，正在从 HTML 和 CSS 开始一点点学起。
+        这个网站是我用来练手的第一个完整项目，也是我整理学习笔记的地方。
+      </p>
+      <p>
+        在学前端之前，我 [写一句你之前的经历]。现在每天会花一些时间写代码，
+        遇到卡住的地方就记下来，慢慢把踩过的坑变成自己的经验。
+      </p>
+      <p>
+        除了写代码，我还喜欢 [写一两个你的爱好]。如果你也在学前端，欢迎一起交流。
+      </p>
+    </section>
+
+    <!-- 技能标签 -->
+    <section class="section">
+      <h2 class="section-title">目前会的东西</h2>
+      <ul class="skill-list">
+        <li>HTML 基础标签</li>
+        <li>CSS 颜色与字体</li>
+        <li>Flex 横向布局</li>
+        <li>Grid 网格布局</li>
+        <li>手机屏幕适配</li>
+      </ul>
+    </section>
+
+    <!-- 正在学的 -->
+    <section class="section">
+      <h2 class="section-title">正在学</h2>
+      <ul class="skill-list">
+        <li>CSS 定位</li>
+        <li>JavaScript 基础</li>
+        <li>Git 与版本管理</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <a class="btn" href="contact.html">联系我</a>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      © 2026 我的主页 · 用 HTML 和 CSS 手写而成<br>
+      我在 CSDN 也写博客：<a href="https://blog.csdn.net/good_sleeping" target="_blank" rel="noopener">good_sleeping 的主页</a>
+    </div>
+  </footer>
+
+  <!-- 交互脚本放在 </body> 前面：浏览器从上往下读，
+       读到这里时页面上所有标签都已经存在了，脚本才找得到它们。 -->
+  <script src="js/main.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>文章 · 我的主页</title>
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- 这段小脚本会在页面「显示出来之前」就先跑一遍：
+       先看看你上次选的是不是深色，如果是，就立刻给 <html> 加上 theme-dark 这个 class。
+       这样打开页面时不会先闪一下白色再变黑（不做这一步也能切换，只是会闪）。 -->
+  <script>
+    (function () {
+      var saved = localStorage.getItem('theme');
+      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (saved === 'dark' || (!saved && prefersDark)) {
+        document.documentElement.classList.add('theme-dark');
+      }
+    })();
+  </script>
+</head>
+<body>
+
+  <!-- 屏幕两侧的装饰图片：只在宽屏显示（≥1360px），窄屏会自动隐藏。
+       aria-hidden="true" 是告诉读屏软件「这只是装饰，不用念出来」。 -->
+  <div class="side-deco" aria-hidden="true">
+    <img src="images/side-left.jpg" alt="">
+    <img src="images/side-right.jpg" alt="">
+  </div>
+
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="site-name">我的主页</a>
+      <!-- 页头右边：把「导航」和「主题按钮」打包成一个整体 -->
+      <div class="header-right">
+        <nav class="nav">
+          <a href="index.html">首页</a>
+          <a href="about.html">关于我</a>
+          <a href="posts.html" class="active">文章</a>
+          <a href="works.html">项目</a>
+          <a href="contact.html">联系我</a>
+          <!-- 外站链接：target="_blank" 表示在新标签页打开，
+               rel="noopener" 是安全写法（不让新页面反过来控制本站），下同 -->
+          <a href="https://blog.csdn.net/good_sleeping" target="_blank" rel="noopener">CSDN</a>
+        </nav>
+        <!-- 主题按钮：上面的文字会由 js/main.js 自动改成「深色」或「浅色」 -->
+        <button class="theme-toggle" type="button">深色</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <h1 class="page-title">全部文章</h1>
+    <p class="page-desc">目前共 7 篇 · 最新一篇来自我的 CSDN 博客</p>
+
+    <!-- 每个 <a class="post-item"> 就是一张文章卡片。
+         除了最上面那篇跳到 CSDN，其余各篇都是跳到 article.html 这个详情页 ——
+         等你写自己的文章时，再复制 article.html 改成 article-2.html 这样分别链接。 -->
+    <section class="section">
+      <div class="post-list">
+
+        <!-- 这篇是真实文章（不是占位）：它直接跳到我 CSDN 博客上的原文，
+             所以链接加了 target="_blank" rel="noopener" ——
+             点开会在新标签页打开 CSDN，本站不会被关掉。 -->
+        <a class="post-item" href="https://blog.csdn.net/good_sleeping/article/details/165114802" target="_blank" rel="noopener">
+          <span class="post-badge">CSDN 原文</span>
+          <h3>第31期第二周学习总结</h3>
+          <p class="post-meta">2026-09-12 · 学习笔记 · CSDN</p>
+          <p class="post-excerpt">Python 循环练习笔记：while 循环怎么用，break 和 continue 分别管什么，还有我自己踩过的几个坑。</p>
+        </a>
+
+        <!-- 第一篇加 featured，让它比其余几篇更显眼 -->
+        <a class="post-item featured" href="article.html">
+          <span class="post-badge">最新</span>
+          <h3>我为什么决定开始学前端</h3>
+          <p class="post-meta">2026-10-18 · 学习笔记</p>
+          <p class="post-excerpt">从「标签是什么」开始说起，聊聊我做这个决定的原因，以及这段时间最真实的感受。</p>
+        </a>
+
+        <a class="post-item" href="article.html">
+          <h3>HTML 常用标签速查（自己整理版）</h3>
+          <p class="post-meta">2026-10-15 · 学习笔记</p>
+          <p class="post-excerpt">标题、段落、链接、图片、列表……我把最常用的标签按用途分了个类，方便回头翻。</p>
+        </a>
+
+        <a class="post-item" href="article.html">
+          <h3>第一次把网页放到互联网上</h3>
+          <p class="post-meta">2026-10-11 · 踩坑记录</p>
+          <p class="post-excerpt">从本地文件到有公网地址，中间遇到了一堆问题，记录一下解决过程。</p>
+        </a>
+
+        <a class="post-item" href="article.html">
+          <h3>CSS 里的 margin 和 padding 到底差在哪</h3>
+          <p class="post-meta">2026-10-06 · 学习笔记</p>
+          <p class="post-excerpt">一开始我总分不清这两个，写错了好几次之后终于想明白了，用一张图说清它们的关系。</p>
+        </a>
+
+        <a class="post-item" href="article.html">
+          <h3>给网站换了三种配色，最后选了浅蓝</h3>
+          <p class="post-meta">2026-10-02 · 设计随笔</p>
+          <p class="post-excerpt">深色、大排版、简约白底都试了一遍，说说我是怎么挑出最适合自己的那个。</p>
+        </a>
+
+        <a class="post-item" href="article.html">
+          <h3>我的第一个页面：从空白文件到能看懂的结构</h3>
+          <p class="post-meta">2026-09-28 · 学习笔记</p>
+          <p class="post-excerpt">第一次写 HTML 的时候完全不知道从哪下手，这篇是我的起步过程。</p>
+        </a>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      © 2026 我的主页 · 用 HTML 和 CSS 手写而成<br>
+      我在 CSDN 也写博客：<a href="https://blog.csdn.net/good_sleeping" target="_blank" rel="noopener">good_sleeping 的主页</a>
+    </div>
+  </footer>
+
+  <!-- 交互脚本放在 </body> 前面：浏览器从上往下读，
+       读到这里时页面上所有标签都已经存在了，脚本才找得到它们。 -->
+  <script src="js/main.js"></script>
+
+</body>
+</html>

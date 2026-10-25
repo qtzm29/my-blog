@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<!-- 上面这一行告诉浏览器：这是一个 HTML5 网页 -->
+<!-- lang="zh-CN" 表示这个页面的语言是简体中文 -->
+<html lang="zh-CN">
+<head>
+  <!-- 这三行是每个页面都必须有的「页头信息」 -->
+  <meta charset="UTF-8">                                      <!-- 让中文不乱码 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  <!-- 手机上正常显示 -->
+  <title>首页 · 我的主页</title>                                <!-- 浏览器标签页上的标题 -->
+  <!-- 把 css/style.css 里的样式引进来，全站共用这一个文件 -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- 这段小脚本会在页面「显示出来之前」就先跑一遍：
+       先看看你上次选的是不是深色，如果是，就立刻给 <html> 加上 theme-dark 这个 class。
+       这样打开页面时不会先闪一下白色再变黑（不做这一步也能切换，只是会闪）。 -->
+  <script>
+    (function () {
+      var saved = localStorage.getItem('theme');
+      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (saved === 'dark' || (!saved && prefersDark)) {
+        document.documentElement.classList.add('theme-dark');
+      }
+    })();
+  </script>
+</head>
+<body>
+
+  <!-- 屏幕两侧的装饰图片：只在宽屏显示（≥1360px），窄屏会自动隐藏。
+       aria-hidden="true" 是告诉读屏软件「这只是装饰，不用念出来」。 -->
+  <div class="side-deco" aria-hidden="true">
+    <img src="images/side-left.jpg" alt="">
+    <img src="images/side-right.jpg" alt="">
+  </div>
+
+  <!-- ==================== 页头（每个页面都一样，只改 class="active" 的位置） ==================== -->
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="site-name">我的主页</a>
+      <!-- 页头右边：把「导航」和「主题按钮」打包成一个整体 -->
+      <div class="header-right">
+        <nav class="nav">
+          <a href="index.html" class="active">首页</a>
+          <a href="about.html">关于我</a>
+          <a href="posts.html">文章</a>
+          <a href="works.html">项目</a>
+          <a href="contact.html">联系我</a>
+          <!-- 外站链接：target="_blank" 表示在新标签页打开，
+               rel="noopener" 是安全写法（不让新页面反过来控制本站），下同 -->
+          <a href="https://blog.csdn.net/good_sleeping" target="_blank" rel="noopener">CSDN</a>
+        </nav>
+        <!-- 主题按钮：上面的文字会由 js/main.js 自动改成「深色」或「浅色」 -->
+        <button class="theme-toggle" type="button" aria-label="切换到深色模式">深色</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== 正文开始 ==================== -->
+  <main class="container">
+
+    <!-- 个人介绍区：左边头像，右边名字和一句话简介 -->
+    <section class="hero">
+      <!-- 头像就是我的 CSDN 头像，但图片文件已经下载到本地 images/avatar.jpg。
+           为什么不用 CSDN 的原图地址？因为 CSDN 图床有防盗链：
+           浏览器从 localhost 引用它时会被拒绝，图片就不显示了。
+           想换头像：把新图片放进 images 文件夹，再改下面的 src 就行。 -->
+      <img class="avatar" src="images/avatar.jpg" alt="杨昭林的头像">
+      <div class="hero-text">
+        <h1>你好，我是杨昭林</h1>
+        <p>正在学前端的初学者。这里记录我的学习笔记、踩过的坑，和做过的小项目。</p>
+      </div>
+    </section>
+
+    <!-- 一条小数据：让访客一眼就知道这个站里有什么东西。
+         数字记得跟实际情况同步改一下。 -->
+    <section class="stat-row">
+      <div class="stat-item">
+        <span class="stat-number">7</span>
+        <span class="stat-label">篇文章</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">3</span>
+        <span class="stat-label">个项目</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">100%</span>
+        <span class="stat-label">手写代码</span>
+      </div>
+    </section>
+
+    <!-- 最新文章：只展示 3 篇，每篇是一整块可以点击的卡片 -->
+    <section class="section">
+      <h2 class="section-title">最新文章</h2>
+      <div class="post-list">
+
+        <!-- 第一篇多了一个 featured（特色）class，让它比后面两张更突出。
+             这就是最省事的「主次对比」：同一类卡片，加一个 class 就分出轻重。 -->
+        <a class="post-item featured" href="article.html">
+          <span class="post-badge">最新</span>
+          <h3>我为什么决定开始学前端</h3>
+          <p class="post-meta">2026-10-18 · 学习笔记</p>
+          <p class="post-excerpt">从「标签是什么」开始说起，聊聊我做这个决定的原因，以及这段时间最真实的感受。</p>
+        </a>
+
+        <a class="post-item" href="article.html">
+          <h3>HTML 常用标签速查（自己整理版）</h3>
+          <p class="post-meta">2026-10-15 · 学习笔记</p>
+          <p class="post-excerpt">标题、段落、链接、图片、列表……我把最常用的标签按用途分了个类，方便回头翻。</p>
+        </a>
+
+        <a class="post-item" href="article.html">
+          <h3>第一次把网页放到互联网上</h3>
+          <p class="post-meta">2026-10-11 · 踩坑记录</p>
+          <p class="post-excerpt">从本地文件到有公网地址，中间遇到了一堆问题，记录一下解决过程。</p>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- 一个通向文章列表页的按钮 -->
+    <section class="section">
+      <a class="btn" href="posts.html">查看全部文章</a>
+    </section>
+
+  </main>
+  <!-- ==================== 正文结束 ==================== -->
+
+  <!-- ==================== 页脚 ==================== -->
+  <footer class="site-footer">
+    <div class="container">
+      © 2026 我的主页 · 用 HTML 和 CSS 手写而成<br>
+      我在 CSDN 也写博客：<a href="https://blog.csdn.net/good_sleeping" target="_blank" rel="noopener">good_sleeping 的主页</a>
+    </div>
+  </footer>
+
+  <!-- 交互脚本放在 </body> 前面：浏览器从上往下读，
+       读到这里时页面上所有标签都已经存在了，脚本才找得到它们。 -->
+  <script src="js/main.js"></script>
+
+</body>
+</html>

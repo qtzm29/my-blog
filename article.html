@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>我为什么决定开始学前端 · 我的主页</title>
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- 这段小脚本会在页面「显示出来之前」就先跑一遍：
+       先看看你上次选的是不是深色，如果是，就立刻给 <html> 加上 theme-dark 这个 class。
+       这样打开页面时不会先闪一下白色再变黑（不做这一步也能切换，只是会闪）。 -->
+  <script>
+    (function () {
+      var saved = localStorage.getItem('theme');
+      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (saved === 'dark' || (!saved && prefersDark)) {
+        document.documentElement.classList.add('theme-dark');
+      }
+    })();
+  </script>
+</head>
+<body>
+
+  <!-- 屏幕两侧的装饰图片：只在宽屏显示（≥1360px），窄屏会自动隐藏。
+       aria-hidden="true" 是告诉读屏软件「这只是装饰，不用念出来」。 -->
+  <div class="side-deco" aria-hidden="true">
+    <img src="images/side-left.jpg" alt="">
+    <img src="images/side-right.jpg" alt="">
+  </div>
+
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="site-name">我的主页</a>
+      <!-- 页头右边：把「导航」和「主题按钮」打包成一个整体 -->
+      <div class="header-right">
+        <nav class="nav">
+          <a href="index.html">首页</a>
+          <a href="about.html">关于我</a>
+          <a href="posts.html" class="active">文章</a>
+          <a href="works.html">项目</a>
+          <a href="contact.html">联系我</a>
+          <!-- 外站链接：target="_blank" 表示在新标签页打开，
+               rel="noopener" 是安全写法（不让新页面反过来控制本站），下同 -->
+          <a href="https://blog.csdn.net/good_sleeping" target="_blank" rel="noopener">CSDN</a>
+        </nav>
+        <!-- 主题按钮：上面的文字会由 js/main.js 自动改成「深色」或「浅色」 -->
+        <button class="theme-toggle" type="button">深色</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- 文章标题区：标题 + 日期分类 -->
+    <header class="article-header">
+      <h1>我为什么决定开始学前端</h1>
+      <p class="post-meta">2026-10-18 · 学习笔记</p>
+    </header>
+
+    <!-- 文章正文：这里就是很普通的段落、小标题、列表和代码块 -->
+    <article class="article-body">
+      <p>
+        这是正文的占位内容。写这篇文章的时候，我刚开始学前端没多久，
+        连标签都还没认全，但已经能感觉到「自己能做出东西」这件事挺上瘾的。
+      </p>
+
+      <h2>一开始的困惑</h2>
+      <p>
+        最开始我完全不知道该从哪下手。网上教程很多，有的直接讲框架，
+        有的从「什么是网页」讲起。后来我决定先不管那么多，从最基础的开始：
+      </p>
+      <ul>
+        <li>先认识 HTML 的常用标签，知道每个标签是干嘛的；</li>
+        <li>再学 CSS，学会让页面变好看；</li>
+        <li>最后再碰 JavaScript，让页面能交互。</li>
+      </ul>
+
+      <h2>我的第一行代码</h2>
+      <p>
+        第一个页面的骨架大概长这样。每个标签都是成对出现的，
+        中间夹着的内容就是它要管的东西：
+      </p>
+
+      <!-- pre 标签会原样保留空格和换行，适合放代码 -->
+      <pre>&lt;h1&gt;你好，世界&lt;/h1&gt;
+&lt;p&gt;这是我的第一个网页&lt;/p&gt;</pre>
+
+      <h2>接下来打算做什么</h2>
+      <p>
+        先把这个个人网站写完，把学过的标签和样式都用一遍，
+        然后开始碰 JavaScript。这篇就先写到这儿，之后有新进展再更新。
+      </p>
+
+      <!-- 文章底部导航：左中右三个链接。
+           外层用 Flex 的 space-between 把两边顶到边，中间那个自然就居中了。 -->
+      <nav class="article-nav">
+        <a href="posts.html">← 上一篇</a>
+        <a class="nav-back" href="posts.html">返回文章列表</a>
+        <a href="posts.html">下一篇 →</a>
+      </nav>
+    </article>
+
+    <!-- 除了这个站，我平时也会把学习笔记发在 CSDN 上。
+         这个按钮直接跳到我那篇文章的 CSDN 原文（新标签页打开）。 -->
+    <section class="section">
+      <a class="btn" href="https://blog.csdn.net/good_sleeping/article/details/165114802" target="_blank" rel="noopener">在 CSDN 阅读原文</a>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      © 2026 我的主页 · 用 HTML 和 CSS 手写而成<br>
+      我在 CSDN 也写博客：<a href="https://blog.csdn.net/good_sleeping" target="_blank" rel="noopener">good_sleeping 的主页</a>
+    </div>
+  </footer>
+
+  <!-- 交互脚本放在 </body> 前面：浏览器从上往下读，
+       读到这里时页面上所有标签都已经存在了，脚本才找得到它们。 -->
+  <script src="js/main.js"></script>
+
+</body>
+</html>
